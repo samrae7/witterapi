@@ -5,8 +5,6 @@ export class Film {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({
-    length: 100
-  })
+  @Column("text")
   name: string;
 }
