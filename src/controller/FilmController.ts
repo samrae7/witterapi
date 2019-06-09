@@ -1,10 +1,14 @@
+import "reflect-metadata";
 import {getRepository} from "typeorm";
 import {NextFunction, Request, Response} from "express";
 import {Film} from "../entity/Film";
 
 export class FilmController {
+    private filmRepository;
 
-    private filmRepository = getRepository(Film);
+    constructor(filmRepository = getRepository(Film)) {
+      this.filmRepository = filmRepository;
+    }
 
     async all(request: Request, response: Response, next: NextFunction) {
         return this.filmRepository.find();
