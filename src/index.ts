@@ -32,10 +32,10 @@ createConnection().then(async connection => {
     app.listen(3000);
 
     // insert new film
-    await connection.manager.save(connection.manager.create(Film, {
-        name: "Where the Wind Blows"
-    }));
+    // await connection.manager.save(connection.manager.create(Film, {
+    //     name: "Where the Wind Blows"
+    // }));
 
-    console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results");
+    console.log("Express server has started on port 3000. Open http://localhost:3000/films to see results");
 
 }).catch(error => console.log(error));
