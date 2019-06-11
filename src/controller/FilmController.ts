@@ -6,8 +6,8 @@ import {Film} from "../entity/Film";
 export class FilmController {
     private filmRepository;
 
-    constructor(filmRepository = getRepository(Film)) {
-      this.filmRepository = filmRepository;
+    constructor() {
+        this.filmRepository = getRepository(Film);
     }
 
     async all(request: Request, response: Response, next: NextFunction) {
