@@ -10,3 +10,7 @@ Using `psql` CLI to query the database:
 
 1. `psql witter_api`
 2. `SELECT * FROM public.user;`
+
+Run tests
+
+`npm test`
