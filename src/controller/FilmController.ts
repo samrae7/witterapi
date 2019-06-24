@@ -1,10 +1,10 @@
 import "reflect-metadata";
-import {getRepository} from "typeorm";
+import {getRepository, Repository} from "typeorm";
 import {NextFunction, Request, Response} from "express";
 import {Film} from "../entity/Film";
 
 export class FilmController {
-    private filmRepository;
+    private filmRepository: Repository<Film>;
 
     constructor() {
         this.filmRepository = getRepository(Film);
@@ -26,5 +26,4 @@ export class FilmController {
         let userToRemove = await this.filmRepository.findOne(request.params.id);
         await this.filmRepository.remove(userToRemove);
     }
-
 }

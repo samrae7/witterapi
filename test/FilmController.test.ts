@@ -14,7 +14,8 @@ let mockedFilmRepository;
 beforeAll(() => {
   films = [{id: 1, name: "Back to the Future"}, {id: 2, name: "Time Bandits"}];
   mockedFilmRepository = td.object<Repository<Film>>();
-  sinon.stub(typeorm, "getRepository").returns(mockedFilmRepository as Repository<any>);
+  sinon.stub(typeorm, "getRepository").returns(mockedFilmRepository);
+  // as Repository<any>
   filmController = new FilmController();
 })
 
@@ -33,4 +34,21 @@ test('filmController - get one', async () => {
   mockRequest.params.id = 1;
   const result = await filmController.one(mockRequest, mockResponse, () => {})
   expect(result).toEqual(films[0]);
+});
+
+test('filmController - save', async () => {
+  const mockRequest = td.object<Request>();
+  const mockResponse = td.object<Response>();
+  mockRequest.body = {"name": "Star Wars"};
+  await filmController.save(mockRequest, mockResponse, () => {})
+  td.verify(mockedFilmRepository.save({"name": "Star Wars"}));
+});
+
+test('filmController - remove', async () => {
+  const mockRequest = td.object<Request>();
+  const mockResponse = td.object<Response>();
+  mockRequest.params.id = 2;
+  td.when(mockedFilmRepository.findOne(2)).thenResolve(films[1]);
+  await filmController.remove(mockRequest, mockResponse, () => {});
+  td.verify(mockedFilmRepository.remove(films[1]));
 });
