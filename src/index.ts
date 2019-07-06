@@ -1,13 +1,26 @@
 import "reflect-metadata";
-import {createConnection} from "typeorm";
+import {createConnection, ConnectionOptions} from "typeorm";
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import {Request, Response} from "express";
 import {Routes} from "./routes";
-import {Film} from "./entity/Film";
+import * as PostgressConnectionStringParser from 'pg-connection-string';
 
-createConnection().then(async connection => {
+const connectionOptions = PostgressConnectionStringParser.parse(process.env.DATABASE_URL);
 
+createConnection(<ConnectionOptions>{
+    type: "postgres", host: connectionOptions.host || "localhost",
+    port: connectionOptions.port || 5432,
+    username: connectionOptions.user,
+    password: connectionOptions.password,
+    database: connectionOptions.database,
+    "entities": [
+        "src/entity/**/*.ts"
+     ],
+     "migrations": [
+        "src/migration/**/*.ts"
+     ]
+}).then(async connection => {
     // create express app
     const app = express();
     app.use(bodyParser.json());
