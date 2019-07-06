@@ -14,6 +14,7 @@ createConnection(<ConnectionOptions>{
     username: connectionOptions.user,
     password: connectionOptions.password,
     database: connectionOptions.database,
+    "synchronize": true,
     "entities": [
         "src/entity/**/*.ts"
      ],
