@@ -19,7 +19,15 @@ createConnection(<ConnectionOptions>{
      ],
      "migrations": [
         "src/migration/**/*.ts"
-     ]
+     ],
+     "subscribers": [
+        "src/subscriber/**/*.ts"
+     ],
+     "cli": {
+        "entitiesDir": "src/entity",
+        "migrationsDir": "src/migration",
+        "subscribersDir": "src/subscriber"
+     }
 }).then(async connection => {
     // create express app
     const app = express();
