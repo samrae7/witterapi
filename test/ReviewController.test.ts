@@ -23,7 +23,7 @@ beforeAll(() => {
   reviewController = new ReviewController();
 });
 
-test('reviewController - save', async () => {
+test('reviewController - save review of existing film', async () => {
   td.when(mockedFilmRepository.findOne("1")).thenResolve(films[0]);
   const mockRequest = td.object<Request>();
   const mockResponse = td.object<Response>();
@@ -32,3 +32,15 @@ test('reviewController - save', async () => {
   await reviewController.save(mockRequest, mockResponse, () => {})
   td.verify(mockedReviewRepository.save({youTubeVideoId, film: films[0]}));
 });
+
+test('reviewController - save review of new film', async () => {
+  const mockRequest = td.object<Request>();
+  const mockResponse = td.object<Response>();
+  const youTubeVideoId = "1BBBAB";
+  const newFilmPayload = {name: "Avengers: End Game"};
+  mockRequest.body = {"youTubeVideoId": youTubeVideoId, "film": newFilmPayload};
+  await reviewController.save(mockRequest, mockResponse, () => {})
+  td.verify(mockedReviewRepository.save({youTubeVideoId, film: newFilmPayload}));
+});
+
+
