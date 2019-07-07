@@ -1,5 +1,6 @@
 import "reflect-metadata";
-import {Entity, Column, PrimaryGeneratedColumn} from "typeorm";
+import {Entity, Column, PrimaryGeneratedColumn, OneToOne} from "typeorm";
+import { Review } from './Review';
 
 @Entity()
 export class Film {
@@ -10,4 +11,7 @@ export class Film {
     length: 100
   })
   name: string;
+
+  @OneToOne(type => Review, review => review.film)
+  review?: Review;
 }
