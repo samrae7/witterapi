@@ -5,3 +5,6 @@ build/
 tmp/
 temp/
 dev-diary.md
+
+# DB backups
+backups/

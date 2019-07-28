@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import {Entity, Column, PrimaryGeneratedColumn, OneToOne} from "typeorm";
+import {Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn} from "typeorm";
 import { Review } from './Review';
 
 @Entity()
@@ -12,6 +12,7 @@ export class Film {
   })
   name: string;
 
-  @OneToOne(type => Review, review => review.film)
+  @OneToOne(type => Review, review => review.film, {nullable: true})
+  @JoinColumn()
   review?: Review;
 }
