@@ -14,8 +14,3 @@ Using `psql` CLI to query the database:
 Run tests
 
 `npm test`
-
-## Dev notes
-
-Running against my local db:
-`DATABASE_URL=samuelrae:@localhost/witter_api npm start`
