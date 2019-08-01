@@ -13,6 +13,5 @@ export class Film {
   name: string;
 
   @OneToOne(type => Review, review => review.film, {nullable: true})
-  @JoinColumn()
   review?: Review;
 }
