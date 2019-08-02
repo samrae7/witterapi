@@ -7,6 +7,11 @@ const filmRoutes = [{
   action: "all"
 }, {
   method: "get",
+  route: "/films-with-reviews",
+  controller: FilmController,
+  action: "allWithReviews"
+}, {
+  method: "get",
   route: "/films/:id",
   controller: FilmController,
   action: "one"
