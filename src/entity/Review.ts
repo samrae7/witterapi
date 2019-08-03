@@ -14,7 +14,8 @@ export class Review {
   date: Date;
 
   @OneToOne(type => Film, film => film.review, {
-    cascade: true
+    cascade: true,
+    onDelete: "CASCADE"
   })
   @JoinColumn()
   film: Film;
