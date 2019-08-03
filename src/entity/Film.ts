@@ -8,7 +8,8 @@ export class Film {
   id: number;
 
   @Column({
-    length: 100
+    length: 100,
+    unique: true
   })
   name: string;
 
