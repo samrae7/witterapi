@@ -2,8 +2,13 @@
 .vscode/
 node_modules/
 build/
+
+# tmp folders
 tmp/
 temp/
+src/migration-copy
+
+# my notes on the project
 dev-diary.md
 
 # DB backups
