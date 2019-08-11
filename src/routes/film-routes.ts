@@ -21,6 +21,11 @@ const filmRoutes = [{
   controller: FilmController,
   action: "save"
 }, {
+  method: "put",
+  route: "/films/:id",
+  controller: FilmController,
+  action: "update"
+}, {
   method: "delete",
   route: "/films/:id",
   controller: FilmController,

@@ -28,8 +28,14 @@ export class FilmController {
         return this.filmRepository.save(request.body);
     }
 
+    async update(request: Request, response: Response, next: NextFunction) {
+        const film = await this.filmRepository.findOne(request.params.id);
+        const merged = await this.filmRepository.merge(film, request.body);
+        return this.filmRepository.save(merged);
+    }
+
     async remove(request: Request, response: Response, next: NextFunction) {
         let userToRemove = await this.filmRepository.findOne(request.params.id);
-        await this.filmRepository.remove(userToRemove);
+        return this.filmRepository.remove(userToRemove);
     }
 }
