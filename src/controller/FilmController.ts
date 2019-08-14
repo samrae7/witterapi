@@ -35,7 +35,7 @@ export class FilmController {
     }
 
     async remove(request: Request, response: Response, next: NextFunction) {
-        let userToRemove = await this.filmRepository.findOne(request.params.id);
-        return this.filmRepository.remove(userToRemove);
+        let filmToRemove = await this.filmRepository.findOne(request.params.id);
+        return this.filmRepository.remove(filmToRemove);
     }
 }
