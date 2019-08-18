@@ -16,6 +16,9 @@ export class Film {
   @Column({nullable: true})
   poster_id: string;
 
+  @Column({nullable: true})
+  backdrop_image: string;
+
   @OneToOne(type => Review, review => review.film, {nullable: true})
   review?: Review;
 }
