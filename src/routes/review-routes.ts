@@ -16,6 +16,11 @@ const reviewRoutes = [{
   controller: ReviewController,
   action: "save"
 }, {
+  method: "put",
+  route: "/reviews/:id",
+  controller: ReviewController,
+  action: "update"
+}, {
   method: "delete",
   route: "/reviews/:id",
   controller: ReviewController,

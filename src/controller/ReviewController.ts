@@ -34,7 +34,13 @@ export class ReviewController {
     }
 
     async remove(request: Request, response: Response, next: NextFunction) {
-        let userToRemove = await this.reviewRepository.findOne(request.params.id);
-        await this.reviewRepository.remove(userToRemove);
+        const reviewToRemove = await this.reviewRepository.findOne(request.params.id);
+        await this.reviewRepository.remove(reviewToRemove);
+    }
+
+    async update(request: Request, response: Response, next: NextFunction) {
+        const review = await this.reviewRepository.findOne(request.params.id);
+        const merged = await this.reviewRepository.merge(review, request.body);
+        return this.reviewRepository.save(merged);
     }
 }
