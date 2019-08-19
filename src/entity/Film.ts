@@ -14,7 +14,7 @@ export class Film {
   name: string;
 
   @Column({nullable: true})
-  poster_id: string;
+  poster: string;
 
   @Column({nullable: true})
   backdrop_image: string;
