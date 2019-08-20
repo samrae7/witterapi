@@ -1,14 +1,16 @@
 import "reflect-metadata";
-import {createConnection, ConnectionOptions} from "typeorm";
+import {createConnection, ConnectionOptions } from "typeorm";
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import {Request, Response} from "express";
 import {Routes} from "./routes";
 import * as PostgressConnectionStringParser from 'pg-connection-string';
 
+import * as fs from "fs";
+
 const connectionOptions = PostgressConnectionStringParser.parse(process.env.DATABASE_URL);
 
-createConnection(<ConnectionOptions>{
+const typeOrmOptions: ConnectionOptions = {
     type: "postgres",
     host: connectionOptions.host || "localhost",
     port: connectionOptions.port || 5432,
@@ -30,7 +32,9 @@ createConnection(<ConnectionOptions>{
         "migrationsDir": "src/migration",
         "subscribersDir": "src/subscriber"
      }
-}).then(async connection => {
+};
+
+createConnection(typeOrmOptions).then(async connection => {
     // create express app
     const app = express();
     app.use(bodyParser.json());
@@ -62,3 +66,13 @@ createConnection(<ConnectionOptions>{
     console.log("Express server has started on port 3000. Open http://localhost:3000/films to see results");
 
 }).catch(error => console.log(error));
+
+const json = JSON.stringify(typeOrmOptions, null, 2);
+
+fs.writeFile("./target/ormconfig.json", json, (err) => {
+    if (err) {
+        console.error(err);
+        return;
+    }
+    console.log("File has been created");
+});
