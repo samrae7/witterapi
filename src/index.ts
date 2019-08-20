@@ -9,7 +9,8 @@ import * as PostgressConnectionStringParser from 'pg-connection-string';
 const connectionOptions = PostgressConnectionStringParser.parse(process.env.DATABASE_URL);
 
 createConnection(<ConnectionOptions>{
-    type: "postgres", host: connectionOptions.host || "localhost",
+    type: "postgres",
+    host: connectionOptions.host || "localhost",
     port: connectionOptions.port || 5432,
     username: connectionOptions.user,
     password: connectionOptions.password,
