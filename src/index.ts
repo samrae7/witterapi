@@ -8,7 +8,7 @@ import * as PostgressConnectionStringParser from 'pg-connection-string';
 
 import * as fs from "fs";
 
-console.log("XXX", process.env.DATABSE_URL);
+console.log("XXX", process.env.DATABASE_URL);
 const connectionOptions = PostgressConnectionStringParser.parse(process.env.DATABASE_URL);
 
 const typeOrmOptions: ConnectionOptions = {
@@ -70,7 +70,7 @@ createConnection(typeOrmOptions).then(async connection => {
 
 const json = JSON.stringify(typeOrmOptions, null, 2);
 
-fs.writeFile("./target/ormconfig.json", json, (err) => {
+fs.writeFile("./ormconfig.json", json, (err) => {
     if (err) {
         console.error(err);
         return;
