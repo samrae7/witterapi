@@ -8,6 +8,7 @@ import * as PostgressConnectionStringParser from 'pg-connection-string';
 
 import * as fs from "fs";
 
+console.log("XXX", process.env.DATABSE_URL);
 const connectionOptions = PostgressConnectionStringParser.parse(process.env.DATABASE_URL);
 
 const typeOrmOptions: ConnectionOptions = {
